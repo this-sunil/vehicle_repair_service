@@ -1,0 +1,13 @@
+import express from "express";
+import upload from "../middleware/upload.js";
+import { changePassController, deleteUserController, fetchProfileController, forgotPassController, getAllUserController, loginController, registerController,updateProfileController } from "../controller/authController.js";
+const router=express.Router();
+router.post("/login",upload.none(),loginController);
+router.post("/register",upload.none(),registerController);
+router.post("/getProfile",upload.none(),fetchProfileController);
+router.delete("/deleteUserById",upload.none(),deleteUserController);
+router.post("/updateProfile",upload.single('photo'),updateProfileController);
+router.post("/forgotPass",upload.none(),forgotPassController);
+router.post("/getAllUser",upload.none(),getAllUserController);
+router.post("/changePass",upload.none(),changePassController);
+export default router;

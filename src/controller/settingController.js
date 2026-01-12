@@ -127,3 +127,36 @@ export const getSettingController=async(req,res)=>{
     }
 };
 
+export const fetchSettingController=async(req,res)=>{
+    try {
+        const uid=req.body.id;
+        const checkQuery=`SELECT * FROM users WHERE id=$1`;
+        console.log(uid);
+        
+        const result=await pool.query(checkQuery,[uid]);
+        if(result.rows.length===0){
+            return res.status(200).json({
+                status:false,
+                msg:"User doesn't exist"
+            });
+        }
+        const query=`SELECT * FROM settings`;
+        const {rows}=await pool.query(query);
+        if(rows.length===0){
+            return res.status(404).json({
+                status:false,
+                msg:"Data Not Found !!!"
+            });
+        }
+        return res.status(200).json({
+            status:true,
+            msg:"Fetch Setting Successfully !!!",
+            result:rows[0]
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status:false,
+            msg:"Internal Server Error"
+        });
+    }
+};

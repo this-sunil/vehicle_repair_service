@@ -234,7 +234,7 @@ export const updateProfileController = async (req, res) => {
   }
 };
 
-export const changePassController=async(req,res)=>{
+export const forgotPassController=async(req,res)=>{
   const {phone,old_pass,current_pass}=req.body;
   try {
     const existUser=`SELECT * FROM users WHERE phone=$1`;
@@ -270,7 +270,7 @@ export const changePassController=async(req,res)=>{
   }
 };
 
-export const forgotPassController=async(req,res)=>{
+export const changePassController=async(req,res)=>{
   const {phone,current_pass}=req.body;
   try {
     const checkQuery=`SELECT * FROM users WHERE phone=$1`;

@@ -131,7 +131,7 @@ export const getAllCategoryController=async(req,res)=>{
 
 export const getAllVehicleType=async (req,res) => {
   try {
-    const query=`select cid,vehicle_type from category order by cid`;
+    const query=`select cid,title from category order by cid`;
     const {rows}=await pool.query(query);
     if(rows.length===0){
       return res.status(404).json({

@@ -7,7 +7,7 @@ import authRoute from "./routes/authRoute.js";
 import categoryRoute from "./routes/categoryRoute.js";
 import vehicleRoute from "./routes/serviceRoute.js";
 import settingRoute from "./routes/settingRoute.js";
-import bookingRoute from "./routes/bookingRoute.js";
+import bookingRoute from "./routes/bookRoute.js";
 
 const app=express();
 app.use(express.urlencoded({extended:true}));

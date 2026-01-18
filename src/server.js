@@ -11,7 +11,7 @@ import settingRoute from "./routes/settingRoute.js";
 const app=express();
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-console.log("PORT =", process.env.DB_USER);
+console.log("PORT =", process.env.PORT);
 app.use(cors({
     origin: "*",
     optionsSuccessStatus: 200,

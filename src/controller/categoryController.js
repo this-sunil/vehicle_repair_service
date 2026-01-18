@@ -27,7 +27,7 @@ export const addCategoryController = async (req, res) => {
     return res.status(200).json({
       status: true,
       msg: "Insert Category Successfully !!!",
-      result: rows[0],
+      result: rows[0]
     });
   } catch (error) {
     console.log(`Error in add Category=>${error.msg}`);
@@ -127,4 +127,27 @@ export const getAllCategoryController=async(req,res)=>{
             msg:"Internal Server Error"
         });
     }
+};
+
+export const getAllVehicleType=async (req,res) => {
+  try {
+    const query=`SELECT vehicle_type from category`;
+    const rows=await pool.query(query);
+    if(rows.length===0){
+      return res.status(404).json({
+        status:false,
+        msg:"No data found !!!"
+      });
+    }
+    return res.status(200).json({
+      status:true,
+      msg:"Fetch Vehicle category Successfully !!!",
+      result:rows
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status:true,
+      msg:"Internal Server Error"
+    });
+  }
 };

@@ -6,4 +6,5 @@ router.post("/addCategory",upload.single('photo'),addCategoryController);
 router.post("/updateCategory",upload.single('photo'),updateCategoryController);
 router.delete("/deleteCatById",upload.none(),deleteCategoryController);
 router.post("/getAllCategory",upload.none(),getAllCategoryController);
+router.post("/getVehicleType",upload.none(),getAllCategoryController);
 export default router;

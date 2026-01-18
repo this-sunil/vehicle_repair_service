@@ -1,10 +1,10 @@
 import express from "express";
-import { addCategoryController, deleteCategoryController, getAllCategoryController, updateCategoryController } from "../controller/categoryController.js";
+import { addCategoryController, deleteCategoryController, getAllCategoryController, getAllVehicleType, updateCategoryController } from "../controller/categoryController.js";
 import upload from "../middleware/upload.js";
 const router=express.Router();
 router.post("/addCategory",upload.single('photo'),addCategoryController);
 router.post("/updateCategory",upload.single('photo'),updateCategoryController);
 router.delete("/deleteCatById",upload.none(),deleteCategoryController);
 router.post("/getAllCategory",upload.none(),getAllCategoryController);
-router.post("/getAllVehicleType",upload.none(),getAllCategoryController);
+router.post("/getAllVehicleType",upload.none(),getAllVehicleType);
 export default router;

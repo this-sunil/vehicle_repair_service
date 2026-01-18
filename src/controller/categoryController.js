@@ -131,8 +131,8 @@ export const getAllCategoryController=async(req,res)=>{
 
 export const getAllVehicleType=async (req,res) => {
   try {
-    const query=`SELECT vehicle_type from category`;
-    const rows=await pool.query(query);
+    const query=`select cid,vehicle_type from category order by cid`;
+    const {rows}=await pool.query(query);
     if(rows.length===0){
       return res.status(404).json({
         status:false,
@@ -146,7 +146,7 @@ export const getAllVehicleType=async (req,res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      status:true,
+      status:false,
       msg:"Internal Server Error"
     });
   }

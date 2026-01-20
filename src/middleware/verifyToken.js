@@ -21,7 +21,6 @@ export const verifyToken=async(req,res,next)=>{
             });
         }
         const token=authorization.split(" ")[1];
-        console.log(`Secret Token=>${process.env.SECRET_TOKEN}`);
         const decode=jwt.verify(token,process.env.SECRET_TOKEN,{algorithms:"HS256"});
         req.user=decode;
         next();

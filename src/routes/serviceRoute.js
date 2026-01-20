@@ -6,5 +6,5 @@ const router=express.Router();
 router.post("/addService",upload.single('photo'),addServiceController);
 router.put("/updateService",upload.single('photo'),updateServiceController);
 router.post("/deleteService",upload.none(),deleteVehicleController);
-router.post("/getAllVehicle",verifyToken,upload.none(),getAllVehicleServiceController);
+router.post("/getAllService",verifyToken,upload.none(),getAllVehicleServiceController);
 export default router;

@@ -98,18 +98,30 @@ export const deleteVehicleController=async(req,res)=>{
 };
 
 export const getAllVehicleServiceController=async(req,res)=>{
+    const limit=Number(req.body.limit) || 10;
+    const page=Number(req.body.page) || 1;
     try{
-      const query=`SELECT * FROM vehicle_service`;
-      const {rows}=await pool.query(query);
+        const offset=(page-1)*limit;
+      const query=`SELECT * FROM vehicle_service ORDER BY id LIMIT $1 OFFSET $2`;
+       
+      const {rows}=await pool.query(query,[limit,offset]);
       if(rows.length===0){
         return res.status(404).json({
             status:false,
             msg:"No Data Found !!!"
         });
       }
+      const totalItem=Number(rows.length);
+      const totalPage=Math.ceil(totalItem/limit);
+      const prevPage=page>1;
+      const nextPage=page<totalPage;
       return res.status(200).json({
         status:true,
         msg:"Fetch Data Successfully!!!",
+        page,
+        totalPage,
+        prevPage,
+        nextPage,
         result:rows
       });
     }catch(e){

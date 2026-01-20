@@ -1,3 +1,4 @@
+import { log } from "console";
 import pool from "../database/db.js";
 
 const createVehicleService=async()=>{
@@ -39,19 +40,30 @@ export const addServiceController=async(req,res)=>{
 };
 
 export const updateServiceController=async(req,res)=>{
-    const { title,description,pick_time,pick_date }=req.body;
+    const { id,title,description }=req.body;
     try {
         const fields=[];
         const values=[];
         let currentIndex=1;
-        const data={ title,description,pick_time,pick_date };
+        const data={ title,description};
+        const photo=req.file?req.file.filename:"";
         for(const [key,value] of Object.entries(data)){
-            fields.push(`${key}=$${currentIndex}`);
-            values.push(value);
-            currentIndex++;
+            if(value !== undefined){
+                fields.push(`${key}=$${currentIndex}`);
+                values.push(value);
+                currentIndex++;
+            }
+            console.log(`${key}=>${value}`);
         }
+
+        if(photo){
+            fields.push(`photo=$${currentIndex++}`);
+            values.push(photo);
+        }
+        values.push(id);
+        
         const query=`UPDATE vehicle_service SET ${fields.join(", ")} WHERE id=$${currentIndex} RETURNING *`;
-        const {rows}=await pool.query(query,[title,description]);
+        const {rows}=await pool.query(query,values);
         if(rows.length===0){
             return res.status(404).json({
                 status:false,
@@ -67,7 +79,7 @@ export const updateServiceController=async(req,res)=>{
         console.log(`Error in Vehicle Controller=>${error}`);
         return res.status(500).json({
             status:false,
-            msg:"Internal Server Error"
+            msg:`Internal Server Error ${error.message}`
         });
     }
 };

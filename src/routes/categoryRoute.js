@@ -3,9 +3,9 @@ import { addCategoryController, deleteCategoryController, getAllCategoryControll
 import upload from "../middleware/upload.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 const router=express.Router();
-router.post("/addCategory",upload.single('photo'),verifyToken,addCategoryController);
-router.post("/updateCategory",upload.single('photo'),verifyToken,updateCategoryController);
-router.delete("/deleteCatById",upload.none(),verifyToken,deleteCategoryController);
-router.post("/getAllCategory",upload.none(),verifyToken,getAllCategoryController);
-router.post("/getAllVehicleType",upload.none(),verifyToken,getAllVehicleType);
+router.post("/addCategory",verifyToken,upload.single('photo'),addCategoryController);
+router.post("/updateCategory",verifyToken,upload.single('photo'),updateCategoryController);
+router.delete("/deleteCatById",verifyToken,upload.none(),deleteCategoryController);
+router.post("/getAllCategory",verifyToken,upload.none(),getAllCategoryController);
+router.post("/getAllVehicleType",verifyToken,upload.none(),getAllVehicleType);
 export default router;

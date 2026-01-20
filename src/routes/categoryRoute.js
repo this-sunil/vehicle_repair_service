@@ -1,10 +1,11 @@
 import express from "express";
 import { addCategoryController, deleteCategoryController, getAllCategoryController, getAllVehicleType, updateCategoryController } from "../controller/categoryController.js";
 import upload from "../middleware/upload.js";
+import { verifyToken } from "../middleware/verifyToken.js";
 const router=express.Router();
-router.post("/addCategory",upload.single('photo'),addCategoryController);
-router.post("/updateCategory",upload.single('photo'),updateCategoryController);
-router.delete("/deleteCatById",upload.none(),deleteCategoryController);
-router.post("/getAllCategory",upload.none(),getAllCategoryController);
-router.post("/getAllVehicleType",upload.none(),getAllVehicleType);
+router.post("/addCategory",upload.single('photo'),verifyToken,addCategoryController);
+router.post("/updateCategory",upload.single('photo'),verifyToken,updateCategoryController);
+router.delete("/deleteCatById",upload.none(),verifyToken,deleteCategoryController);
+router.post("/getAllCategory",upload.none(),verifyToken,getAllCategoryController);
+router.post("/getAllVehicleType",upload.none(),verifyToken,getAllVehicleType);
 export default router;

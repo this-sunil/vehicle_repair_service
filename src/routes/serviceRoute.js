@@ -1,9 +1,10 @@
 import express from "express";
 import upload from "../middleware/upload.js";
 import { addServiceController, deleteVehicleController, getAllVehicleServiceController, updateServiceController } from "../controller/servicesController.js";
+import { verifyToken } from "../middleware/verifyToken.js";
 const router=express.Router();
-router.post("/addService",upload.single('photo'),addServiceController);
-router.put("/updateService",upload.single('photo'),updateServiceController);
-router.post("/deleteService",upload.none(),deleteVehicleController);
-router.post("/getAllVehicle",upload.none(),getAllVehicleServiceController);
+router.post("/addService",upload.single('photo'),verifyToken,addServiceController);
+router.put("/updateService",upload.single('photo'),verifyToken,updateServiceController);
+router.post("/deleteService",upload.none(),verifyToken,deleteVehicleController);
+router.post("/getAllVehicle",upload.none(),verifyToken,getAllVehicleServiceController);
 export default router;

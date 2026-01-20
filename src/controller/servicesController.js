@@ -1,4 +1,3 @@
-import { log } from "console";
 import pool from "../database/db.js";
 
 const createVehicleService=async()=>{

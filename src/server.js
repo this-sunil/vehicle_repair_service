@@ -8,6 +8,7 @@ import categoryRoute from "./routes/categoryRoute.js";
 import vehicleRoute from "./routes/serviceRoute.js";
 import settingRoute from "./routes/settingRoute.js";
 import bookingRoute from "./routes/bookRoute.js";
+import notificationRoute from "./routes/notificationRoute.js";
 
 const app=express();
 app.use(express.urlencoded({extended:true}));
@@ -44,6 +45,7 @@ app.use("/api",categoryRoute);
 app.use("/api",vehicleRoute);
 app.use("/api",settingRoute);
 app.use("/api",bookingRoute);
+app.use("/api",notificationRoute);
 
 app.listen(PORT,()=>{
     console.log(`Server Started at http://localhost:${PORT}`);

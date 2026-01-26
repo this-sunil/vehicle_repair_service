@@ -122,7 +122,9 @@ export const getAllVehicleServiceController = async (req, res) => {
         msg: "No Data Found !!!",
       });
     }
-    const totalItem = Number(rows.length);
+    const countQuery = `SELECT COUNT(*) FROM vehicle_service`;
+    const countResult = await pool.query(countQuery);
+    const totalItem = Number(countResult.rows[0].count);
     const totalPage = Math.ceil(totalItem / limit);
     const prevPage = page > 1;
     const nextPage = page < totalPage;

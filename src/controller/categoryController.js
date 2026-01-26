@@ -117,8 +117,10 @@ export const getAllCategoryController = async (req, res) => {
         msg: "No Data Found !!!",
       });
     }
-    const totalItem=Number(rows.length);
-    const totalPage=Math.ceil(totalItem/limit);
+    const countQuery = `SELECT COUNT(*) FROM category`;
+    const countResult = await pool.query(countQuery);
+    const totalItem = Number(countResult.rows[0].count);
+    const totalPage = Math.ceil(totalItem / limit);
     const prevPage=page>1;
     const nextPage=page<totalPage;
     return res.status(200).json({

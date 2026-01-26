@@ -9,7 +9,7 @@ import vehicleRoute from "./routes/serviceRoute.js";
 import settingRoute from "./routes/settingRoute.js";
 import bookingRoute from "./routes/bookRoute.js";
 import notificationRoute from "./routes/notificationRoute.js";
-
+import serviceCenterRoute from "./routes/shopRoute.js"
 const app=express();
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
@@ -46,6 +46,7 @@ app.use("/api",vehicleRoute);
 app.use("/api",settingRoute);
 app.use("/api",bookingRoute);
 app.use("/api",notificationRoute);
+app.use("/api",serviceCenterRoute);
 
 app.listen(PORT,()=>{
     console.log(`Server Started at http://localhost:${PORT}`);
